@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Reporte de Inventario</title>
+<style>
+body {
+  font-family: system-ui;
+  background: #f5f7fa;
+  padding: 16px;
+}
+.card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 16px;
+  box-shadow: 0 6px 16px rgba(0,0,0,.06);
+}
+.badge {
+  padding: 12px;
+  border-radius: 12px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+.green { background:#e6f7ec; color:#137a3f }
+.yellow { background:#fff4e5; color:#9a6b00 }
+.red { background:#fdecea; color:#a12622 }
+.money { font-size:20px; font-weight:700 }
+.item { margin:10px 0 }
+</style>
+</head>
+
+<body>
+
+<div class="card">
+  <h1>📊 Reporte de Inventario – Hoy</h1>
+</div>
+
+<div class="card">
+  <div class="badge green">🟢 {{resumen.verde}} saludables</div>
+  <div class="badge yellow">🟡 {{resumen.amarillo}} en riesgo</div>
+  <div class="badge red">🔴 {{resumen.rojo}} críticos</div>
+  <p>💰 <span class="money">${{resumen.capitalDetenido}}</span> capital detenido</p>
+</div>
+
+<div class="card">
+  <h2>🏆 Producto que más te hace ganar</h2>
+  <p><strong>{{resumen.topProducto.producto}}</strong></p>
+  <p>Margen: ${{resumen.topProducto.margen}}</p>
+  <p>Última venta: hace {{resumen.topProducto.diasSinVenta}} días</p>
+</div>
+
+<div class="card">
+  <h2>🔴 Productos que requieren acción</h2>
+
+  {{#each resumen.criticos}}
+    <div class="item">
+      <strong>{{producto}}</strong><br/>
+      {{diasSinVenta}} días sin vender<br/>
+      Capital detenido: ${{capital}}
+    </div>
+  {{/each}}
+
+</div>
+
+<div class="card">
+  <h2>💡 Recomendación del día</h2>
+  <p>❌ No compres productos en rojo esta semana.</p>
+  <p>✔ Prioriza vender lo que ya tienes.</p>
+</div>
+
+</body>
+</html>
